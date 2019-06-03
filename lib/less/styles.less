@@ -489,6 +489,38 @@ body {
 }
 
 .footer {
-  min-height: 583px;
+  min-height: auto;
   background-image: linear-gradient(to left, #3bb7f7, #55c6c5 99%);
+  padding-bottom: 100px;
+
+  .footer-container {
+    display: flex;
+    padding-top: 30px;
+  }
+
+  a {
+    text-decoration: none;
+    color: #ffffff;
+  }
+
+  ul {
+    width:100%;
+    list-style:none;
+    text-transform: uppercase;
+    display: inherit;
+    justify-content: space-between;
+  }
+
+  ul li {
+    float:left;
+    color: #ffffff;
+  }
+  ul li ul {
+    padding:0;
+  }
+  ul li ul li {
+    float:none;
+    padding:5px 0;
+  }
+
 }
