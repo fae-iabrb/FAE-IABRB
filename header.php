@@ -84,13 +84,20 @@
       <div class="main-header-inside-middle">
         <div class="top-menus">
           <div class="top-menus-content">
-            <span><a href="#">Home</a></span>
-            <span class="vertical-line-top-menu"></span>
-            <span><a href="#">Institucional</a></span>
-            <span class="vertical-line-top-menu"></span>
-            <span><a href="#">Contato</a></span>
-            <span class="vertical-line-top-menu"></span>
-            <span><a href="#">Notícias</a></span>
+          <?php
+            
+            $menuParameters = array(
+              'theme_location' => 'main-menu',
+              'container_class' => 'top-menus-content',
+              'container'       => false,
+              'echo'            => false,
+              'items_wrap'      => '%3$s',
+              'depth'           => 0,
+            );
+            
+            echo strip_tags(wp_nav_menu( $menuParameters ), '<div>' );
+
+          ?>
           </div>
         </div>
         <div class="middle-search">
