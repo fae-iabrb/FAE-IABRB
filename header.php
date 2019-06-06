@@ -84,20 +84,52 @@
       <div class="main-header-inside-middle">
         <div class="top-menus">
           <div class="top-menus-content">
-          <?php
-            
-            $menuParameters = array(
-              'theme_location' => 'main-menu',
-              'container_class' => 'top-menus-content',
-              'container'       => false,
-              'echo'            => false,
-              'items_wrap'      => '%3$s',
-              'depth'           => 0,
-            );
-            
-            echo strip_tags(wp_nav_menu( $menuParameters ), '<div>' );
+              
+              <?php $args = array(
+                'sort_order' => 'asc',
+                'sort_column' => 'post_title',
+                'hierarchical' => 1,
+                'exclude' => '',
+                'include' => '',
+                'meta_key' => '',
+                'meta_value' => '',
+                'authors' => '',
+                'child_of' => 0,
+                'parent' => -1,
+                'exclude_tree' => '',
+                'number' => '',
+                'offset' => 0,
+                'post_type' => 'page',
+                'post_status' => 'publish'
+              ); 
 
-          ?>
+                $menu_name = 'main-menu';
+ 
+                if ( ( $locations = get_nav_menu_locations() ) && isset( $locations[ $menu_name ] ) ) {
+                    $menu = wp_get_nav_menu_object( $locations[ $menu_name ] );
+                
+                    $menu_items = wp_get_nav_menu_items($menu->term_id);
+                
+                    $menu_list = '<div id="menu-' . $menu_name . '">';
+                
+                    foreach ( (array) $menu_items as $key => $menu_item ) {
+                        $i++; 
+                        $title = $menu_item->title;
+                        $url = $menu_item->url;
+                        $menu_list .= '<span><a href="' . $url . '">' . $title . '</a></span>';
+                        $separetor = '<span class="vertical-line-top-menu"></span>';                                       
+                        if ($i != count($menu_items)) {
+                          $menu_list .= $separetor;
+                        }  
+                    }
+                    $menu_list .= '</div>';
+                } else {
+                    $menu_list = '<div><span>Menu "' . $menu_name . '" not defined.</span></div>';
+                }
+
+                echo $menu_list;
+
+              ?>
           </div>
         </div>
         <div class="middle-search">
