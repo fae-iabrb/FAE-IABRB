@@ -164,6 +164,7 @@
     </div>
   </div>
   <div class="submenu">
+    <div class="container" id="bottom-menus">
 
   <?php
 
@@ -174,13 +175,14 @@
                 
                     $menu_items = wp_get_nav_menu_items($menu->term_id);   
                     
-                    $menu_list = "";
+                    
                                     
                     foreach ( (array) $menu_items as $key => $menu_item ) {
                       if ( $menu_item->menu_item_parent != 0 ) :                         
                         $title = $menu_item->title;
                         $url = $menu_item->url;
-                        $parent_id = $menu_item->menu_item_parent;                                                
+                        $parent_id = $menu_item->menu_item_parent; 
+                        $menu_list = '<div id='. "menu-" . $parent_id . 'class="collapse" data-parent="#bottom-menus">';                                               
                         $menu_list .= '<div data-toggle="collapse" id="' . "menu-" . $parent_id . '">' . $title . '</a><i class="fas fa-angle-down"></i></div>';
                       endif; 
                     } 
@@ -194,7 +196,7 @@
               ?>
 
 
-    <div class="container" id="bottom-menus">
+    
       <div id="submenu-1" class="collapse" data-parent="#bottom-menus">
         <a href="#">Educação Básica</a>
         <a href="#">Educação Profissionalizante</a>
@@ -202,6 +204,7 @@
         <a href="#">Centro de Idiomas</a>
         <a href="#">Centro de Idiomas</a>
       </div>
+      
       <div id="submenu-2" class="collapse" data-parent="#bottom-menus">
         <a href="#">Sub-1</a>
         <a href="#">Sub-2</a>
