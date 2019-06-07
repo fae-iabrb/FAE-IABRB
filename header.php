@@ -85,23 +85,7 @@
         <div class="top-menus">
           <div class="top-menus-content">
               
-              <?php $args = array(
-                'sort_order' => 'asc',
-                'sort_column' => 'post_title',
-                'hierarchical' => 1,
-                'exclude' => '',
-                'include' => '',
-                'meta_key' => '',
-                'meta_value' => '',
-                'authors' => '',
-                'child_of' => 0,
-                'parent' => -1,
-                'exclude_tree' => '',
-                'number' => '',
-                'offset' => 0,
-                'post_type' => 'page',
-                'post_status' => 'publish'
-              ); 
+              <?php 
 
                 $menu_name = 'main-menu';
  
@@ -137,13 +121,37 @@
           <button type="submit" class="header-input-search-button"><img src="/wp-content/themes/FAE-IABRB/lib/images/icons/search-icon.svg" width="15px" height="15px"/></button>
         </div>
         <nav class="bottom-menus">
-          
-            <div data-toggle="collapse" href="#submenu-1" >Ensino <i class="fas fa-angle-down"></i></div>             
-            <div data-toggle="collapse" href="#submenu-2" >Eventos <i class="fas fa-angle-down"></i></div>
-            <div data-toggle="collapse" href="#submenu-3" >Pesquisa e Extensão <i class="fas fa-angle-down"></i></div>
-            <div data-toggle="collapse" href="#submenu-4" >Secretaria <i class="fas fa-angle-down"></i></i></div>
-            <div data-toggle="collapse" href="#submenu-5" >Biblioteca <i class="fas fa-angle-down"></i></div>
-          
+
+        <?php 
+
+                $menu_name = 'secondary-menu';
+ 
+                if ( ( $locations = get_nav_menu_locations() ) && isset( $locations[ $menu_name ] ) ) {
+                    $menu = wp_get_nav_menu_object( $locations[ $menu_name ] );
+                
+                    $menu_items = wp_get_nav_menu_items($menu->term_id);   
+                    
+                    $menu_list = "";
+                                    
+                    foreach ( (array) $menu_items as $key => $menu_item ) {
+                      if ( $menu_item->menu_item_parent == 0 ) :                         
+                        $title = $menu_item->title;
+                        $url = $menu_item->url;
+                        $id = $menu_item->ID;                                                
+                        $menu_list .= '<div data-toggle="collapse" href="' . "#menu-" . $id  . '">' . $title . '</a><i class="fas fa-angle-down"></i></div>';
+                      endif; 
+                    } 
+                    
+                } else {
+                    $menu_list = '<div><span>Menu "' . $menu_name . '" not defined.</span></div>';
+                }
+
+                echo $menu_list;               
+
+              ?>
+        
+         
+         
         </nav>
       </div>
       <div class="logo-fae">
@@ -156,6 +164,36 @@
     </div>
   </div>
   <div class="submenu">
+
+  <?php
+
+  $menu_name = 'secondary-menu';
+ 
+                if ( ( $locations = get_nav_menu_locations() ) && isset( $locations[ $menu_name ] ) ) {
+                    $menu = wp_get_nav_menu_object( $locations[ $menu_name ] );
+                
+                    $menu_items = wp_get_nav_menu_items($menu->term_id);   
+                    
+                    $menu_list = "";
+                                    
+                    foreach ( (array) $menu_items as $key => $menu_item ) {
+                      if ( $menu_item->menu_item_parent != 0 ) :                         
+                        $title = $menu_item->title;
+                        $url = $menu_item->url;
+                        $parent_id = $menu_item->menu_item_parent;                                                
+                        $menu_list .= '<div data-toggle="collapse" id="' . "menu-" . $parent_id . '">' . $title . '</a><i class="fas fa-angle-down"></i></div>';
+                      endif; 
+                    } 
+                    
+                } else {
+                    $menu_list = '<div><span>Menu "' . $menu_name . '" not defined.</span></div>';
+                }
+
+                echo $menu_list;               
+
+              ?>
+
+
     <div class="container" id="bottom-menus">
       <div id="submenu-1" class="collapse" data-parent="#bottom-menus">
         <a href="#">Educação Básica</a>
@@ -187,3 +225,5 @@
     </div>
   </div>
 </header>
+
+
