@@ -5,13 +5,13 @@
     <!-- The slideshow -->
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="./wp-content/themes/FAE-IABRB/lib/images/banner-slider/default-1.jpg" alt="Los Angeles">
+        <img src="<?php echo get_template_directory_uri() ?>/lib/images/banner-slider/default-1.jpg" alt="Los Angeles">
       </div>
       <div class="carousel-item">
-        <img src="./wp-content/themes/FAE-IABRB/lib/images/banner-slider/default-1.jpg" alt="Chicago">
+        <img src="<?php echo get_template_directory_uri() ?>/lib/images/banner-slider/default-1.jpg" alt="Chicago">
       </div>
       <div class="carousel-item">
-        <img src="./wp-content/themes/FAE-IABRB/lib/images/banner-slider/default-1.jpg" alt="New York">
+        <img src="<?php echo get_template_directory_uri() ?>/lib/images/banner-slider/default-1.jpg" alt="New York">
       </div>
     </div>
     
