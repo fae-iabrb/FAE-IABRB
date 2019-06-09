@@ -3,17 +3,41 @@
   <div id="banner-carousel" class="carousel slide" data-ride="carousel">
     
     <!-- The slideshow -->
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="<?php echo get_template_directory_uri() ?>/lib/images/banner-slider/default-1.jpg" alt="Los Angeles">
-      </div>
-      <div class="carousel-item">
-        <img src="<?php echo get_template_directory_uri() ?>/lib/images/banner-slider/default-1.jpg" alt="Chicago">
-      </div>
-      <div class="carousel-item">
-        <img src="<?php echo get_template_directory_uri() ?>/lib/images/banner-slider/default-1.jpg" alt="New York">
-      </div>
-    </div>
+  <div class="carousel-inner">
+
+    <?php
+
+    $args = array( 
+      'post_type'		=> 'Banner'
+    );
+
+    $banners = get_posts($args);    
+
+    ?>
+
+    <?php 
+
+    if($banners):
+     
+    foreach ($banners as $banner): 
+     
+    $i++
+
+    ?>
+
+    <div class="carousel-item <?php if ($i == 1): echo ' active'; endif;?>">
+      
+      <?php echo $content = $banner->post_content; ?> 
+      
+    </div>   
+
+    
+      
+    <?php endforeach; ?>
+    <?php endif; ?>
+   
+     
+  </div>
     
     <!-- Left and right controls -->
     <div class="container">      
