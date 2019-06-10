@@ -10,15 +10,14 @@ function wpb_custom_new_menu() {
 }
 add_action( 'init', 'wpb_custom_new_menu' );
 
-add_theme_support( 'post-formats', array( 'image' ) );
-
+add_theme_support( 'post-formats', array( 'image', 'link' ) );
 
 /**
  * Register a custom post type called "Banner".
  *
  * @see get_post_type_labels() for label keys.
  */
-function wpdocs_codex_Banner_init() {
+function banner_init() {
   $labels = array(
       'name'                  => _x( 'Banners', 'Post type general name', 'textdomain' ),
       'singular_name'         => _x( 'Banner', 'Post type singular name', 'textdomain' ),
@@ -58,13 +57,37 @@ function wpdocs_codex_Banner_init() {
       'has_archive'        => true,
       'hierarchical'       => false,
       'menu_position'      => null,
-      'supports'           => array( 'title', 'editor', 'author', 'post-formats'),
+      'menu_icon'           => 'dashicons-format-gallery',
+      'supports'           => array( 'title', 'editor', 'author', 'post-formats','page-attributes'),
   );
 
   register_post_type( 'Banner', $args );
 }
 
-add_action( 'init', 'wpdocs_codex_Banner_init' );
+add_action( 'init', 'banner_init' );
+
+// A custom function that calls register_post_type
+function register_quickmenu_post_type() {
+  // Set various pieces of text, $labels is used inside the $args array
+  $labels = array(
+     'name' => _x( 'QuickMenus', 'post type general name' ),
+     'singular_name' => _x( 'Movie', 'post type singular name' )
+     
+  );
+  // Set various pieces of information about the post type
+  $args = array(
+    'labels' => $labels,
+    'description' => 'My custom post type',
+    'public' => true,
+    'menu_icon'           => 'dashicons-editor-insertmore',
+    'supports'  => array( 'title', 'editor', 'author', 'thumbnail','custom-fields', 'page-attributes'),
+  );
+  // Register the movie post type with all the information contained in the $arguments array
+  register_post_type( 'QuickMenus', $args );
+}
+
+// The custom function MUST be hooked to the init action hook
+add_action( 'init', 'register_quickmenu_post_type' );
 
 ?>
 
