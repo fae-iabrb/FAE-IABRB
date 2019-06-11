@@ -6,18 +6,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  
+  
+  
  
-  <link rel="stylesheet/less" type="text/css" href="<?php echo get_template_directory_uri() ?>/lib/less/styles.less"/>
+  <link rel="stylesheet/less" type="text/css" href="<?php echo get_template_directory_uri() ?>/lib/less/master.less"/>
   <link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/lib/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
-
+  <script src="<?php echo get_template_directory_uri() ?>/lib/js/less.min.js" ></script>
   <script src="<?php echo get_template_directory_uri() ?>/lib/js/jquery.min.js"></script>
   <script src="<?php echo get_template_directory_uri() ?>/lib/js/popper.min.js"></script>
   <script src="<?php echo get_template_directory_uri() ?>/lib/js/bootstrap.min.js"></script>
-  <script src="<?php echo get_template_directory_uri() ?>/lib/js/less.min.js" ></script>
-
-
 
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <title>FAE | IABRB</title> 
@@ -137,8 +138,22 @@
                       if ( $menu_item->menu_item_parent == 0 ) :                         
                         $title = $menu_item->title;
                         $url = $menu_item->url;
-                        $id = $menu_item->ID;                                                
-                        $menu_list .= '<div data-toggle="collapse" href="' . "#menu-" . $id  . '">' . $title . '</a><i class="fas fa-angle-down"></i></div>';
+                        $id = $menu_item->ID;  
+                        $haveChild = false;                                              
+                        $menu_list .= '<div data-toggle="collapse" href="' . "#menu-" . $id  . '">' . $title . '</a>'; 
+
+                          foreach ( (array) $menu_items as $key => $item ) {
+                            if ( ($item->menu_item_parent != 0) && ($item->menu_item_parent == $id)) :                     
+                              $haveChild = true;
+                            endif; 
+                          }
+
+                          if ($haveChild):
+                          $menu_list .= '<i class="fas fa-angle-down"></i>';
+                          endif; 
+
+                        $menu_list .= '</div>';
+                        
                       endif; 
                     } 
                     
@@ -214,6 +229,13 @@ $menu_name = 'secondary-menu';
                 
                 echo $menu_list;  
   ?>
+
+
+    
+      
+      
+      
+     
       
     </div>
   </div>
