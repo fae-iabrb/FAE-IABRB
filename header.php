@@ -168,63 +168,53 @@
 
   <?php
 
-  $menu_name = 'secondary-menu';
+
+$menu_name = 'secondary-menu';
  
                 if ( ( $locations = get_nav_menu_locations() ) && isset( $locations[ $menu_name ] ) ) {
                     $menu = wp_get_nav_menu_object( $locations[ $menu_name ] );
                 
                     $menu_items = wp_get_nav_menu_items($menu->term_id);   
                     
-                    
-                                    
+                    $menu_list = "";
+                    $i = 0;
+                    $lastParent = 0;
                     foreach ( (array) $menu_items as $key => $menu_item ) {
-                      if ( $menu_item->menu_item_parent != 0 ) :                         
+                      if ( $menu_item->menu_item_parent != 0 ) :  
                         $title = $menu_item->title;
                         $url = $menu_item->url;
-                        $parent_id = $menu_item->menu_item_parent; 
-                        $menu_list = '<div id='. "menu-" . $parent_id . 'class="collapse" data-parent="#bottom-menus">';                                               
-                        $menu_list .= '<div data-toggle="collapse" id="' . "menu-" . $parent_id . '">' . $title . '</a><i class="fas fa-angle-down"></i></div>';
+                        $parent_id = $menu_item->menu_item_parent;   
+                        
+                        if ($lastParent != $parent_id && $i != 0):
+                          $menu_list .= '</div>';
+                        endif;
+
+                        if ($lastParent != $parent_id):
+                        $menu_list .= '<div id='. '"menu-' . $parent_id . '"class="collapse" data-parent="#bottom-menus">';
+                        endif; 
+
+                        if ($i == 0):
+                          $lastParent = $parent_id; 
+                        endif; 
+
+                        $menu_list .= '<a href="' . $url . '">' . $title . '</a>';  
+
+                        if ($lastParent != $parent_id):
+                        $menu_list .= '</div>';
+                        endif;
+
+                        $i++; 
+                        $lastParent = $parent_id;                 
                       endif; 
                     } 
                     
                 } else {
                     $menu_list = '<div><span>Menu "' . $menu_name . '" not defined.</span></div>';
                 }
-
-                echo $menu_list;               
-
-              ?>
-
-
-    
-      <div id="submenu-1" class="collapse" data-parent="#bottom-menus">
-        <a href="#">Educação Básica</a>
-        <a href="#">Educação Profissionalizante</a>
-        <a href="#">Centro de Idiomas</a>
-        <a href="#">Centro de Idiomas</a>
-        <a href="#">Centro de Idiomas</a>
-      </div>
+                
+                echo $menu_list;  
+  ?>
       
-      <div id="submenu-2" class="collapse" data-parent="#bottom-menus">
-        <a href="#">Sub-1</a>
-        <a href="#">Sub-2</a>
-        <a href="#">Sub-3</a>
-      </div>
-      <div id="submenu-3" class="collapse" data-parent="#bottom-menus">
-        <a href="#">Sub-1</a>
-        <a href="#">Sub-2</a>
-        <a href="#">Sub-3</a>
-      </div>
-      <div id="submenu-4" class="collapse" data-parent="#bottom-menus">
-        <a href="#">Sub-1</a>
-        <a href="#">Sub-2</a>
-        <a href="#">Sub-3</a>
-      </div>
-      <div id="submenu-5" class="collapse" data-parent="#bottom-menus">
-        <a href="#">Sub-1</a>
-        <a href="#">Sub-2</a>
-        <a href="#">Sub-3</a>
-      </div>
     </div>
   </div>
 </header>
