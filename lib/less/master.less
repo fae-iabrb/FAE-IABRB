@@ -34,8 +34,8 @@ body {
     margin-left: auto;
     margin-right: auto;
     display: flex;
-    min-height: 147px;
-    align-items: flex-end;
+    min-height: 300px;
+    align-items: center;
     @media (max-width: 600px) {
       flex-direction: column;
       align-items: center;
@@ -79,11 +79,25 @@ body {
     padding: 10px;
     display: flex;
     flex-direction: column;
-    max-width: 150px;
+    width: max-content;
     height: 100%;
     text-align: center;
+    justify-items: center;
     order: 1;
+
+    img {
+      width: 6vw;
+      height: auto;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
     @media (max-width: 600px) {
+      order: 1;
+      img {
+        width: 60vw;
+        height: auto;
+      }
     }
   }
 
@@ -91,7 +105,7 @@ body {
     color: #ffffff;
 
     text-transform: uppercase;
-    font-size: 10px;
+    font-size: 0.8rem;
     letter-spacing: 0.4px;
     line-height: 1.2;
     margin-top: 4px;
@@ -101,24 +115,38 @@ body {
     padding: 10px;
     display: flex;
     flex-direction: column;
-    max-width: 150px;
+    width: max-content;
     height: 100%;
     text-align: center;
+    justify-items: center;
+    justify-content: space-around;
     padding-top: 23px;
     order: 3;
+
+    img {
+      width: 9vw;
+      height: auto;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
     @media (max-width: 600px) {
       order: 2;
+
+      img {
+        width: 60vw;
+        height: auto;
+      }
     }
   }
 
   .logo-fae p {
-    color: #ffffff;
+    color: white;
     text-transform: uppercase;
-    font-size: 10px;
-    letter-spacing: 0.5px;
+    font-size: 0.8rem;
+    letter-spacing: 0.4px;
     line-height: 1.2;
-    margin-top: 7px;
-    font-weight: 600;
+    margin-top: 4px;
   }
 
   .main-header-inside-middle {
@@ -229,7 +257,10 @@ body {
   }
 
   .submenu {
-    background-color: #285274;
+    background-color: white;
+    position: absolute;
+    width: 100%;
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.05), 0 2px 2px 0 rgba(0, 0, 0, 0.05);
 
     #bottom-menus {
       margin-right: auto;
@@ -240,7 +271,7 @@ body {
     a {
       text-decoration: none;
       padding: 0px 10px;
-      color: white;
+      color: #285274;
       line-height: 30px;
     }
   }
@@ -493,6 +524,8 @@ body {
   min-height: auto;
   background-image: linear-gradient(to left, #3bb7f7, #55c6c5 99%);
   padding-bottom: 100px;
+  width: 100%;
+  bottom: 0px;
 
   .footer-container {
     display: flex;
@@ -522,5 +555,35 @@ body {
   ul li ul li {
     float: none;
     padding: 5px 0;
+  }
+}
+
+.pageHeader {
+  height: 250px;
+  background-color: #285274;
+  display: flex;
+  justify-content: space-around;
+
+  h1 {
+    position: relative;
+    color: white;
+    font-weight: 500;
+    top: 60px;s
+  }
+}
+
+.pageMain {
+  background-color: white;
+  padding: 5% 5%;
+  top: -10vh;
+  position: relative;
+  margin-bottom: 15vh;
+  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.05), 0 2px 2px 0 rgba(0, 0, 0, 0.05);
+
+  .pageContent {
+    padding: 1% 5%;
+  }
+  img {
+    max-width: 100%;
   }
 }
