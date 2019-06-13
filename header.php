@@ -35,13 +35,29 @@
           <span class="top-header-portals">Portais Web</span>
         </div>
         <div class="collapse" id="portals">
-                <div><a href="#">Portal acadêmico</a></div>
-                <div><a href="#">Portal acadêmico Mobile</a></div>
-                <div><a href="#">Registro de Atendimento</a></div>
-                <div><a href="#">Webmail</a></div>
-                <div><a href="#">Portal de Inscrições</a></div>
-                <div><a href="#">Consulta ao acervo biblioteca</a></div>
-                <div><a href="#">Manuais</a></div>                      
+        <?php 
+
+$menu_name = 'portals';
+
+if ( ( $locations = get_nav_menu_locations() ) && isset( $locations[ $menu_name ] ) ) {
+    $menu = wp_get_nav_menu_object( $locations[ $menu_name ] );
+
+    $menu_items = wp_get_nav_menu_items($menu->term_id);
+
+    foreach ( (array) $menu_items as $key => $menu_item ) {        
+        $title = $menu_item->title;
+        $url = $menu_item->url;
+        $menu_list .= '<div><a href="' . $url . '">' . $title . '</a></div>';                                       
+       
+    }
+    
+} else {
+    $menu_list = '<div><a>Menu "' . $menu_name . '" not defined.</a></div>';
+}
+
+echo $menu_list;
+
+?>                         
         </div>
       </div>
 

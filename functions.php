@@ -5,6 +5,7 @@ function wpb_custom_new_menu() {
     array(
       'main-menu' => __( 'Menu Principal' ),
       'secondary-menu' => __( 'Menu Secundario' ),
+      'portals' => __( 'Portais' ),
     )
   );
 }
