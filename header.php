@@ -37,29 +37,30 @@
         <div class="collapse" id="portals">
         <?php 
 
-$menu_name = 'portals';
+          $menu_name = 'portals';
 
-if ( ( $locations = get_nav_menu_locations() ) && isset( $locations[ $menu_name ] ) ) {
-    $menu = wp_get_nav_menu_object( $locations[ $menu_name ] );
+          if ( ( $locations = get_nav_menu_locations() ) && isset( $locations[ $menu_name ] ) ) {
+              $menu = wp_get_nav_menu_object( $locations[ $menu_name ] );
 
-    $menu_items = wp_get_nav_menu_items($menu->term_id);
+              $menu_items = wp_get_nav_menu_items($menu->term_id);
 
-    foreach ( (array) $menu_items as $key => $menu_item ) {        
-        $title = $menu_item->title;
-        $url = $menu_item->url;
-        $menu_list .= '<div><a href="' . $url . '">' . $title . '</a></div>';                                       
-       
-    }
-    
-} else {
-    $menu_list = '<div><a>Menu "' . $menu_name . '" not defined.</a></div>';
-}
+              foreach ( (array) $menu_items as $key => $menu_item ) {        
+                  $title = $menu_item->title;
+                  $url = $menu_item->url;
+                  $menu_list .= '<div><a href="' . $url . '">' . $title . '</a></div>';                                       
+                
+              }
+              
+          } else {
+              $menu_list = '<div><a>Menu "' . $menu_name . '" not defined.</a></div>';
+          }
 
-echo $menu_list;
+          echo $menu_list;
 
-?>                         
+          ?> 
+                                  
         </div>
-      </div>
+        </div>
 
       <span class="vertical-line"></span>
       <div class="top-header-social-medias">
@@ -134,8 +135,7 @@ echo $menu_list;
           </div>
         </div>
         <div class="middle-search">
-          <input type="text" class="header-input-search" id="header-search"/>
-          <button type="submit" class="header-input-search-button"><img src="<?php echo get_template_directory_uri() ?>/lib/images/icons/search-icon.svg" width="15px" height="15px"/></button>
+        <?php get_search_form(); ?>
         </div>
         <nav class="bottom-menus">
 

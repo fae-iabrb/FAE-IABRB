@@ -4,14 +4,14 @@
 
 <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 
-<div class="pageHeader">
+<div class="page-header">
   <h1><?php the_title();?></h1>
 </div>
 
 
-  <div class="pageMain container">
+  <div class="page container">
 
-    <div class="pageContent">
+    <div class="page-content">
 
 
 

@@ -13,6 +13,16 @@ body {
   background-size: cover;
 }
 
+.search-form {
+  height: 60px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .header {
   .top-header {
     display: flex;
@@ -208,16 +218,6 @@ body {
       text-decoration: none;
       color: white;
     }
-  }
-
-  .middle-search {
-    width: 90%;
-    height: 60px;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
 
   .header-input-search {
@@ -560,7 +560,7 @@ body {
   }
 }
 
-.pageHeader {
+.page-header {
   height: 250px;
   background-color: #285274;
   display: flex;
@@ -574,18 +574,87 @@ body {
   }
 }
 
-.pageMain {
+.page {
   background-color: white;
-  padding: 5% 5%;
-  top: -10vh;
+  top: -80px;
   position: relative;
-  margin-bottom: 15vh;
+  margin-bottom: 100px;
   box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.05), 0 2px 2px 0 rgba(0, 0, 0, 0.05);
+  min-height: 100vh;
 
-  .pageContent {
-    padding: 1% 5%;
+  .page-content {
+    padding: 30px 35px;
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    p {
+      text-align: justify;
+    }
   }
-  img {
-    max-width: 100%;
+}
+
+.search-header {
+  height: 250px;
+  background-color: #285274;
+  display: flex;
+  justify-content: space-around;
+
+  h1 {
+    position: relative;
+    color: white;
+    font-weight: 500;
+    top: 60px;
+  }
+}
+
+.search {
+  background-color: white;
+  top: -80px;
+  position: relative;
+  margin-bottom: 100px;
+  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.05), 0 2px 2px 0 rgba(0, 0, 0, 0.05);
+  min-height: 100vh;
+
+  .search-content {
+    padding: 30px 35px;
+
+    a {
+      text-decoration: none;
+    }
+
+    .item-result {
+      height: max-content;
+      margin: 20px 0px;
+      padding-left: 30px;
+      border-left: 2px solid #3bb7f7;
+
+      .title {
+        font-size: 1.5rem;
+        color: #3bb7f7;
+        line-height: auto;
+      }
+
+      .resume {
+        display: flex;
+        align-items: center;
+        border-top: 2px solid #285274;
+        border-bottom: 2px solid #285274;
+        padding: 20px 20px;
+        background-color: #f1f1f1;
+
+        img {
+          max-width: 250px;
+          height: 100%;
+          margin-right: 20px;
+        }
+        p {
+          text-align: justify;
+          color: #285274;
+        }
+      }
+    }
   }
 }

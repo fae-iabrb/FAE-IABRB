@@ -1,5 +1,16 @@
 <?php
 
+add_theme_support( 'post-thumbnails');
+
+function shapeSpace_filter_search($query) {
+	if (!$query->is_admin && $query->is_search) {
+		$query->set('post_type', array('post', 'page'));
+	}
+	return $query;
+}
+add_filter('pre_get_posts', 'shapeSpace_filter_search');
+
+
 function wpb_custom_new_menu() {
   register_nav_menus(
     array(
