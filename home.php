@@ -1,13 +1,14 @@
 <?php /* Template Name: Home */ ?>
 
+
 <?php get_header(); ?>
 
 
-<?php include "./wp-content/themes/FAE-IABRB/banner-slider.php"?>
-<?php include "./wp-content/themes/FAE-IABRB/quick-menu.php"?>
-<?php include "./wp-content/themes/FAE-IABRB/highlights.php"?>
-<?php include "./wp-content/themes/FAE-IABRB/event-subscriber.php"?>
-<?php include "./wp-content/themes/FAE-IABRB/schedule.php"?>
+<?php get_template_part("banner-slider"); ?>
+<?php get_template_part("quick-menu"); ?>
+<?php get_template_part("highlights"); ?>
+<?php get_template_part("event-subscriber"); ?>
+<?php get_template_part("schedule"); ?>
 
 
 

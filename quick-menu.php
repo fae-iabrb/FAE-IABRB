@@ -1,24 +1,46 @@
 <div class="container">
   <div class="quick-menu">
-    <div class="box one">
-      <img src="<?php echo get_template_directory_uri() ?>/lib/images/quick-menu/basic-education.svg" alt="Educação Basica">
-      <div class="title">Educação Basica</div>
-    </div>
-    <div class="box two">
-      <img src="<?php echo get_template_directory_uri() ?>/lib/images/quick-menu/vocational-education.svg" alt="Ensino Profissionalizante">
-      <div class="title">Ensino Profissionalizante</div>
-    </div>
-    <div class="box three">
-      <img src="<?php echo get_template_directory_uri() ?>/lib/images/quick-menu/higher-education.svg" alt="Ensino Superior">
-      <div class="title">Ensino Superior</div>
-    </div>
-    <div class="box four">
-      <img src="<?php echo get_template_directory_uri() ?>/lib/images/quick-menu/postgraduate-education.svg" alt="Pós-graduação">
-      <div class="title">Pós-graduação</div>
-    </div>
-    <div class="box five">
-      <img src="<?php echo get_template_directory_uri() ?>/lib/images/quick-menu/centro-de-idiomas.svg" alt="Centro de Idiomas">
-      <div class="title">Centro de Idiomas</div>
-    </div>
+
+  <?php
+
+$the_query = new WP_Query( $args ); 
+
+$args = array( 
+  'post_type'		=> 'QuickMenus',  
+  'orderby'    => 'menu_order',
+  'order'    => 'ASC'
+   
+);
+
+$quickmenus = get_posts($args);    
+
+?>
+
+<?php 
+
+if($quickmenus):
+ 
+foreach ($quickmenus as $menu):   
+
+  $featured_img_url = get_the_post_thumbnail_url($menu->ID, 'full');
+  $page_link = home_url() . "/" . $menu->post_content;
+?>
+
+<a href="<?php echo $page_link ?>">
+<div class="box">
+  <div class="title"><?php echo $menu->post_title ?></div>
+  <div class="over-img"></div>
+  <img src="<?php echo $featured_img_url ?>">      
+</div>
+</a> 
+
+
+
+  
+<?php endforeach; ?>
+<?php endif; ?>
+
+
+     
   </div>
 </div>
