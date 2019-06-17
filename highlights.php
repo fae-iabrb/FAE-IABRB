@@ -1,34 +1,57 @@
+<?php $args = array(
+	'posts_per_page'   => 3,
+	'offset'           => 0,
+	'cat'         => '',
+	'category_name'    => '',
+	'orderby'          => 'date',
+	'order'            => 'DESC',
+	'include'          => '',
+	'exclude'          => '',
+	'meta_key'         => '',
+	'meta_value'       => '',
+	'post_type'        => 'post',
+	'post_mime_type'   => '',
+	'post_parent'      => '',
+	'author'	   => '',
+	'author_name'	   => '',
+	'post_status'      => 'publish',
+	'suppress_filters' => true,
+	'fields'           => '',
+);
+$posts = get_posts( $args ); ?>
+
 <section class="highlights container">
   <div class="title">Destaques</div>
   
   <div class="highlights-container">
 
-    <div class="box">
-      <img src="<?php echo get_template_directory_uri() ?>/lib/images/highlights/highlight-1.png" alt="">
-      <div class="post-title">
-        <p>Análise de Sistemas da FAE desenvolverá mais de 20 projetos em benefício da comunidade</p>
-      </div>
-    </div>
+  <?php 
+  
+  foreach ( $posts as $post ) : setup_postdata( $post ); 
+  
+  ?>
 
-    <div class="box">
-      <img src="<?php echo get_template_directory_uri() ?>/lib/images/highlights/highlight-2.png" alt="">
-      <div class="post-title">
-        <p>Ensino Médio do Barão visita Usina Hidrelétrica Itá</p>
-      </div>
-    </div>
 
-    <div class="box">
-      <img src="<?php echo get_template_directory_uri() ?>/lib/images/highlights/highlight-3.png" alt="">
+	<div class="box">
+    <a href="<?php the_permalink(); ?>">
+      <?php the_post_thumbnail(); ?>
       <div class="post-title">
-        <p>Mais de 15 cursos de Pós-Graduação com inscrições abertas na FAE</p>
+        <p><?php the_title(); ?></p>
       </div>
-    </div>
+    </a>
+	</div>
+
+
+    <?php endforeach; 
+    wp_reset_postdata();?>    
    
   </div>
 
-  <button class="showMore" href="#"> 
-    Ver mais notícias
-    <i class="fas fa-angle-double-right"></i>
+  <button class="showMore"> 
+    <a href="<?php echo get_home_url() . "/noticias/"; ?>">
+      Ver mais notícias
+      <i class="fas fa-angle-double-right"></i>
+    </a>    
   </button>
 
 </section>

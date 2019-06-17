@@ -418,16 +418,22 @@ body {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    color: #285274;
     border: none;
     outline: 0;
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
+
+    a {
+      text-decoration: none;
+      color: #285274;
+    }
   }
 
   .showMore:hover {
     background-color: #285274;
-    color: #ffffff;
+    a {
+      color: #ffffff;
+    }
   }
 }
 
