@@ -23,9 +23,47 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <title>FAE | IABRB</title> 
 </head>
-
+<script>
+  $(document).ready(function(){
+    $('.mobile-menu-button').on('click touchstart', function(e){
+      $('html').toggleClass('mobile-menu-active');
+        e.preventDefault();
+    });
+  })
+</script>
 <body>
+<menu class="mobile-menu">
+  <ul>
+    <?php 
 
+      $menu_name = 'secondary-menu';
+
+      if ( ( $locations = get_nav_menu_locations() ) && isset( $locations[ $menu_name ] ) ) {
+          $menu = wp_get_nav_menu_object( $locations[ $menu_name ] );
+
+          $menu_items = wp_get_nav_menu_items($menu->term_id);   
+          
+          $menu_list = "";
+                          
+          foreach ( (array) $menu_items as $key => $menu_item ) {
+            if ( $menu_item->menu_item_parent == 0 ) :                         
+              $title = $menu_item->title;
+              $url = $menu_item->url;
+              $id = $menu_item->ID;  
+              $haveChild = false;                                              
+              $menu_list .= '<li href="' . "#menu-" . $id  . '">' . $title . '</a> </li>'; 
+            endif; 
+          } 
+          
+      } else {
+          $menu_list = '<li><span>Menu "' . $menu_name . '" not defined.</span></li>';
+      }
+
+      echo $menu_list;               
+
+    ?>
+  </ul>
+</menu>
 <header class="header">
   <div class="top-header">
     <div class="top-header-inside container">
@@ -134,55 +172,55 @@
               ?>
           </div>
         </div>
+        
         <div class="middle-search">
+        <span class="mobile-menu-button"></span>
         <?php get_search_form(); ?>
         </div>
         <nav class="bottom-menus">
 
         <?php 
 
-                $menu_name = 'secondary-menu';
- 
-                if ( ( $locations = get_nav_menu_locations() ) && isset( $locations[ $menu_name ] ) ) {
-                    $menu = wp_get_nav_menu_object( $locations[ $menu_name ] );
+            $menu_name = 'secondary-menu';
+
+            if ( ( $locations = get_nav_menu_locations() ) && isset( $locations[ $menu_name ] ) ) {
+                $menu = wp_get_nav_menu_object( $locations[ $menu_name ] );
+            
+                $menu_items = wp_get_nav_menu_items($menu->term_id);   
                 
-                    $menu_items = wp_get_nav_menu_items($menu->term_id);   
-                    
-                    $menu_list = "";
-                                    
-                    foreach ( (array) $menu_items as $key => $menu_item ) {
-                      if ( $menu_item->menu_item_parent == 0 ) :                         
-                        $title = $menu_item->title;
-                        $url = $menu_item->url;
-                        $id = $menu_item->ID;  
-                        $haveChild = false;                                              
-                        $menu_list .= '<div data-toggle="collapse" href="' . "#menu-" . $id  . '">' . $title . '</a>'; 
+                $menu_list = "";
+                                
+                foreach ( (array) $menu_items as $key => $menu_item ) {
+                  if ( $menu_item->menu_item_parent == 0 ) :                         
+                    $title = $menu_item->title;
+                    $url = $menu_item->url;
+                    $id = $menu_item->ID;  
+                    $haveChild = false;                                              
+                    $menu_list .= '<div data-toggle="collapse" href="' . "#menu-" . $id  . '">' . $title . '</a>'; 
 
-                          foreach ( (array) $menu_items as $key => $item ) {
-                            if ( ($item->menu_item_parent != 0) && ($item->menu_item_parent == $id)) :                     
-                              $haveChild = true;
-                            endif; 
-                          }
+                      foreach ( (array) $menu_items as $key => $item ) {
+                        if ( ($item->menu_item_parent != 0) && ($item->menu_item_parent == $id)) :                     
+                          $haveChild = true;
+                        endif; 
+                      }
 
-                          if ($haveChild):
-                          $menu_list .= '<i class="fas fa-angle-down"></i>';
-                          endif; 
-
-                        $menu_list .= '</div>';
-                        
+                      if ($haveChild):
+                      $menu_list .= '<i class="fas fa-angle-down"></i>';
                       endif; 
-                    } 
+
+                    $menu_list .= '</div>';
                     
-                } else {
-                    $menu_list = '<div><span>Menu "' . $menu_name . '" not defined.</span></div>';
-                }
+                  endif; 
+                } 
+                
+            } else {
+                $menu_list = '<div><span>Menu "' . $menu_name . '" not defined.</span></div>';
+            }
 
-                echo $menu_list;               
+            echo $menu_list;               
 
-              ?>
+        ?>
         
-         
-         
         </nav>
       </div>
       <div class="logo-fae">
@@ -197,62 +235,57 @@
   <div class="submenu">
     <div class="container" id="bottom-menus">
 
-  <?php
+    <?php
 
+        $menu_name = 'secondary-menu';
 
-$menu_name = 'secondary-menu';
- 
-                if ( ( $locations = get_nav_menu_locations() ) && isset( $locations[ $menu_name ] ) ) {
-                    $menu = wp_get_nav_menu_object( $locations[ $menu_name ] );
+        if ( ( $locations = get_nav_menu_locations() ) && isset( $locations[ $menu_name ] ) ) {
+            $menu = wp_get_nav_menu_object( $locations[ $menu_name ] );
+        
+            $menu_items = wp_get_nav_menu_items($menu->term_id);   
+            
+            $menu_list = "";
+            $i = 0;
+            $lastParent = 0;
+            foreach ( (array) $menu_items as $key => $menu_item ) {
+              if ( $menu_item->menu_item_parent != 0 ) :  
+                $title = $menu_item->title;
+                $url = $menu_item->url;
+                $parent_id = $menu_item->menu_item_parent;   
                 
-                    $menu_items = wp_get_nav_menu_items($menu->term_id);   
-                    
-                    $menu_list = "";
-                    $i = 0;
-                    $lastParent = 0;
-                    foreach ( (array) $menu_items as $key => $menu_item ) {
-                      if ( $menu_item->menu_item_parent != 0 ) :  
-                        $title = $menu_item->title;
-                        $url = $menu_item->url;
-                        $parent_id = $menu_item->menu_item_parent;   
-                        
-                        if ($lastParent != $parent_id && $i != 0):
-                          $menu_list .= '</div>';
-                        endif;
+                if ($lastParent != $parent_id && $i != 0):
+                  $menu_list .= '</div>';
+                endif;
 
-                        if ($lastParent != $parent_id):
-                        $menu_list .= '<div id='. '"menu-' . $parent_id . '"class="collapse" data-parent="#bottom-menus">';
-                        endif; 
+                if ($lastParent != $parent_id):
+                $menu_list .= '<div id='. '"menu-' . $parent_id . '"class="collapse" data-parent="#bottom-menus">';
+                endif; 
 
-                        if ($i == 0):
-                          $lastParent = $parent_id; 
-                        endif; 
+                if ($i == 0):
+                  $lastParent = $parent_id; 
+                endif; 
 
-                        $menu_list .= '<a href="' . $url . '">' . $title . '</a>';  
+                $menu_list .= '<a href="' . $url . '">' . $title . '</a>';  
 
-                        if ($lastParent != $parent_id):
-                        $menu_list .= '</div>';
-                        endif;
+                if ($lastParent != $parent_id):
+                $menu_list .= '</div>';
+                endif;
 
-                        $i++; 
-                        $lastParent = $parent_id;                 
-                      endif; 
-                    } 
-                    
-                } else {
-                    $menu_list = '<div><span>Menu "' . $menu_name . '" not defined.</span></div>';
-                }
-                
-                echo $menu_list;  
-  ?>
+                $i++; 
+                $lastParent = $parent_id;                 
+              endif; 
+            } 
+            
+        } else {
+            $menu_list = '<div><span>Menu "' . $menu_name . '" not defined.</span></div>';
+        }
+        
+        echo $menu_list;  
+    ?>
 
 
-    
-      
-      
-      
-     
-      
+
+
     </div>
   </div>
 </header>
