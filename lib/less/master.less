@@ -688,3 +688,129 @@ body {
     }
   }
 }
+
+.mobile-menu-button {
+	width: 40px;
+	height: 32px;
+	display: none;
+	vertical-align: middle;
+	position: relative;
+	text-indent: -9999px;
+	overflow: hidden;
+  cursor: pointer;
+  top: 13px;
+}
+
+.mobile-menu-button:before {
+	content: "";
+	display: block;
+	margin: 7px auto;
+	width: 70%;
+	height: 0.25em;
+	background: #285274;
+	box-shadow: 0 .45em 0 0 #285274, 0 .9em 0 0 #285274;
+}
+
+.mobile-menu-active .mobile-menu-button {background: #ffffff}
+
+.mobile-menu {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 2;
+	width: 220px;
+	height: 100%;
+	padding: 10px;
+	background: #285274;
+  box-shadow: inset -5px -10px 10px 0 rgba(0,0,0,.3);
+  margin: 0;
+}
+
+.mobile-menu ul {
+	list-style: none;
+  padding: 0;
+  line-height: 30px;
+}
+
+.mobile-menu li {
+	display: block;
+	border-bottom: 1px solid rgba(255,255,255,.3);
+	margin: 0 10px;
+	padding: 10px;
+	color: #FFF;
+	text-decoration: none;
+}
+
+.mobile-menu li a:hover {
+	background: #FFF;
+	color: #d55401;
+}
+
+
+/*
+	Aqui você esconde o menu para fora da tela 
+	O valor é exatamente a largura da sidebar
+*/
+.mobile-menu {
+	-webkit-transform: translateX(-220px);
+	-moz-transform: translateX(-220px);
+	-ms-transform: translateX(-220px);
+	transform: translateX(-220px);
+	-webkit-transition: all .25s linear;
+	-moz-transition: all .25s linear;
+	-ms-transition: all .25s linear;
+	transition: all .25s linear;
+}
+
+/*
+	Essa é a posição original do HEADER e do MAIN
+*/
+header, .main {
+	-webkit-transition: all .25s linear;
+	-moz-transition: all .25s linear;
+	-ms-transition: all .25s linear;
+	transition: all .25s linear;
+}
+
+.mobile-menu-active .mobile-menu {
+	-webkit-transform: translateX(0);
+	-moz-transform: translateX(0);
+	-ms-transform: translateX(0);
+	transform: translateX(0);
+}
+
+.mobile-menu-active header, 
+.mobile-menu-active .main {
+	-webkit-transform: translateX(220px);
+	-moz-transform: translateX(220px);
+	-ms-transform: translateX(220px);
+	transform: translateX(220px);
+}
+
+@media (max-width: 600px) {
+  .search-form {
+    margin-right: 0;
+    margin-left: 0;
+    width: 85%;
+    float: right;
+  }
+  .header {
+    .middle-search {
+      display: flex;
+      justify-content: space-between;
+    }
+    .bottom-menus {
+      display: none;
+    }
+    .bottom-menus-mobile {
+      display: block;
+      width: 40px;
+      height: 40px;
+      border: 1px solid;
+    }
+  }
+  .mobile-menu-button {
+    display: inline-block;
+  }
+  html, body {overflow-x: hidden;}
+}
