@@ -32,38 +32,6 @@
   })
 </script>
 <body>
-<menu class="mobile-menu">
-  <ul>
-    <?php 
-
-      $menu_name = 'secondary-menu';
-
-      if ( ( $locations = get_nav_menu_locations() ) && isset( $locations[ $menu_name ] ) ) {
-          $menu = wp_get_nav_menu_object( $locations[ $menu_name ] );
-
-          $menu_items = wp_get_nav_menu_items($menu->term_id);   
-          
-          $menu_list = "";
-                          
-          foreach ( (array) $menu_items as $key => $menu_item ) {
-            if ( $menu_item->menu_item_parent == 0 ) :                         
-              $title = $menu_item->title;
-              $url = $menu_item->url;
-              $id = $menu_item->ID;  
-              $haveChild = false;                                              
-              $menu_list .= '<li href="' . "#menu-" . $id  . '">' . $title . '</a> </li>'; 
-            endif; 
-          } 
-          
-      } else {
-          $menu_list = '<li><span>Menu "' . $menu_name . '" not defined.</span></li>';
-      }
-
-      echo $menu_list;               
-
-    ?>
-  </ul>
-</menu>
 <header class="header">
   <div class="top-header">
     <div class="top-header-inside container">
@@ -289,5 +257,52 @@
     </div>
   </div>
 </header>
+
+<menu class="mobile-menu">
+  <ul>
+    <?php 
+
+      $menu_name = 'secondary-menu';
+
+      if ( ( $locations = get_nav_menu_locations() ) && isset( $locations[ $menu_name ] ) ) {
+          $menu = wp_get_nav_menu_object( $locations[ $menu_name ] );
+
+          $menu_items = wp_get_nav_menu_items($menu->term_id);   
+          
+          $menu_list = "";
+                          
+          foreach ( (array) $menu_items as $key => $menu_item ) {
+            if ( $menu_item->menu_item_parent == 0 ) :                         
+              $title = $menu_item->title;
+              $url = $menu_item->url;
+              $id = $menu_item->ID;  
+              $haveChild = false;                                              
+              $menu_list .= '<li href="' . "#menu-" . $id  . '">' . $title . '</a>'; 
+            
+
+            foreach ( (array) $menu_items as $key => $item ) {
+              if ( ($item->menu_item_parent != 0) && ($item->menu_item_parent == $id)) :                     
+                $haveChild = true;
+              endif; 
+            }
+
+            if ($haveChild):
+            $menu_list .= '&nbsp;<i class="fas fa-angle-down"></i>';
+            endif; 
+
+            $menu_list .= '</li>';
+
+          endif;
+          } 
+          
+      } else {
+          $menu_list = '<li><span>Menu "' . $menu_name . '" not defined.</span></li>';
+      }
+
+      echo $menu_list;               
+
+    ?>
+  </ul>
+</menu>
 
 
