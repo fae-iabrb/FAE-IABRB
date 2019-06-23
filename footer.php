@@ -1,27 +1,56 @@
 <footer class="footer">
   <div class="container">
-    <div class="footer-container">
-      <ul class="footer-ul">
-        <li><a href="#">Home</a>
-          <ul>
-            <li><a href="#">Institucional</a></li>
-            <li><a href="#">Contato</a></li>
-            <li><a href="#">Notícias</a></li>
-          </ul>
-        </li>
-        <li><a href="#">Ensino</a>
-          <ul>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-          </ul>
-        </li>
-        <li><a href="#">Pesquisa e Extensão</a></li>
-        <li><a href="#">Secretaria</a></li>
-        <li><a href="#">Biblioteca</a></li>
-        <li><a href="#">Portais Web</a></li>
-      </ul>
+    <div class="contain">
+      <div class="col">
+        <h1>Company</h1>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Mission</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">Social</a></li>
+          <li><a href="#">Get in touch</a></li>
+        </ul>
+      </div>
+      <div class="col">
+        <h1>Products</h1>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Mission</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">Social</a></li>
+          <li><a href="#">Get in touch</a></li>
+        </ul>
+      </div>
+      <div class="col">
+        <h1>Accounts</h1>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Mission</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">Social</a></li>
+          <li><a href="#">Get in touch</a></li>
+        </ul>
+      </div>
+      <div class="col">
+        <h1>Resources</h1>
+        <ul>
+          <li><a href="#">Webmail</a></li>
+          <li><a href="#">Redeem code</a></li>
+          <li><a href="#">WHOIS lookup</a></li>
+          <li><a href="#">Site map</a></li>
+          <li><a href="#">Web templates</a></li>
+          <li><a href="#">Email templates</a></li>
+        </ul>
+      </div>
+      <div class="col">
+        <h1>Support</h1>
+        <ul>
+          <li><a href="#">Contact us</a></li>
+          <li><a href="#">Web chat</a></li>
+          <li><a href="#">Open ticket</a></li>
+        </ul>
+      </div>
+      <div class="clearfix"></div>
     </div>
   </div>
 </footer>
