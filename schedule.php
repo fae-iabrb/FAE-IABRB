@@ -5,60 +5,54 @@
 
     <div class="schedule-container">
 
-      <div class="event-box">
+    
 
-        <div class="data-box">
-          <div class="data">22 de Abril</div>
-        </div>
+    <?php
 
-        <div class="divider"></div>
+$args = array( 
+  'post_type'		=> 'schedule'
+);
 
-        <div class="day-events-box">
+$agenda = get_posts($args);    
 
-        <div class="event">
+?>
 
-          <div class="event-title">Morbi maximus, purus at lobortis dictum</div>
-          <div class="event-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi maximus, purus at lobortis</div>
-          <div class="event-local">Local: Auditorio IABRB | FAE</div>
-          <div class="event-hour">Horário: 19:30</div>
+<?php 
 
-        </div>  
+if($agenda):
+ 
+foreach ($agenda as $item): 
+ 
+$i++
 
-        <div class="event">
+?>
 
-          <div class="event-title">Morbi maximus, purus at lobortis dictum</div>
-          <div class="event-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi maximus, purus at lobortis</div>
-          <div class="event-local">Local: Auditorio IABRB | FAE</div>
-          <div class="event-hour">Horário: 19:30</div>
+<div class="event-box">
 
-        </div>  
+<div class="data-box">
+  <div class="data"><?php echo $title = $item->post_title; ?></div>
+</div>
 
-        </div>
+<div class="divider"></div>        
 
-      </div>
+<div class="day-events-box">
 
-      <div class="event-box">
+<div class="event">
 
-        <div class="data-box">
-          <div class="data">28 de Maio</div>
-        </div>
+<?php echo $content = $item->post_content; ?> 
 
-        <div class="divider"></div>
+</div>        
 
-        <div class="day-events-box">
+</div>
 
-          <div class="event">
+</div> 
 
-            <div class="event-title">Morbi maximus, purus at lobortis dictum</div>
-            <div class="event-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi maximus, purus at lobortis</div>
-            <div class="event-local">Local: Auditorio IABRB | FAE</div>
-            <div class="event-hour">Horário: 19:30</div>
 
-          </div>          
+  
+<?php endforeach; ?>
+<?php endif; ?>
 
-        </div>
-
-      </div>
+    
       
     </div>
 
