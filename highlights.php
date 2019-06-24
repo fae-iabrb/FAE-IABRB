@@ -48,7 +48,7 @@ $posts = get_posts( $args ); ?>
   </div>
 
   <button class="showMore"> 
-    <a href="<?php echo get_home_url() . "/noticias/"; ?>">
+    <a href="<?php echo get_home_url() . '/noticias/'; ?>">
       Ver mais notícias
       <i class="fas fa-angle-double-right"></i>
     </a>    
