@@ -459,6 +459,10 @@ body {
       background-image: linear-gradient(45deg, #285274, #1b80a5);
       padding: 32px 17px;
       border-bottom: 10px solid #54c5c7;
+      text-decoration: none;
+      text-decoration-line: none;
+      -webkit-transition: background-image 0.6s ease-in-out;
+      transition: background-image 0.6s ease-in-out;
 
       .event-title {
         font-size: 25px;
@@ -475,6 +479,10 @@ body {
         text-align: left;
         color: #54c5c7;
       }
+    }
+
+    .event-box:hover {
+      background-image: linear-gradient(180deg, #285274, #1b80a5);
     }
   }
 }
@@ -652,101 +660,103 @@ body {
 }
 
 .mobile-menu-button {
-	width: 40px;
-	height: 32px;
-	display: none;
-	vertical-align: middle;
-	position: relative;
-	text-indent: -9999px;
-	overflow: hidden;
+  width: 40px;
+  height: 32px;
+  display: none;
+  vertical-align: middle;
+  position: relative;
+  text-indent: -9999px;
+  overflow: hidden;
   cursor: pointer;
   top: 13px;
 }
 
 .mobile-menu-button:before {
-	content: "";
-	display: block;
-	margin: 7px auto;
-	width: 70%;
-	height: 0.25em;
-	background: #285274;
-	box-shadow: 0 .45em 0 0 #285274, 0 .9em 0 0 #285274;
+  content: "";
+  display: block;
+  margin: 7px auto;
+  width: 70%;
+  height: 0.25em;
+  background: #285274;
+  box-shadow: 0 0.45em 0 0 #285274, 0 0.9em 0 0 #285274;
 }
 
-.mobile-menu-active .mobile-menu-button {background: #ffffff}
+.mobile-menu-active .mobile-menu-button {
+  background: #ffffff;
+}
 
 .mobile-menu {
-	position: fixed;
-	top: 0;
-	left: 0;
-	z-index: 2;
-	width: 220px;
-	height: 100%;
-	padding: 10px;
-	background: #285274;
-  box-shadow: inset -5px -10px 10px 0 rgba(0,0,0,.3);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 220px;
+  height: 100%;
+  padding: 10px;
+  background: #285274;
+  box-shadow: inset -5px -10px 10px 0 rgba(0, 0, 0, 0.3);
   margin: 0;
 }
 
 .mobile-menu ul {
-	list-style: none;
+  list-style: none;
   padding: 0;
   line-height: 30px;
 }
 
 .mobile-menu li {
-	display: block;
-	border-bottom: 1px solid rgba(255,255,255,.3);
-	margin: 0 10px;
-	padding: 10px;
-	color: #FFF;
-	text-decoration: none;
+  display: block;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  margin: 0 10px;
+  padding: 10px;
+  color: #fff;
+  text-decoration: none;
 }
 
 .mobile-menu li a:hover {
-	background: #FFF;
-	color: #d55401;
+  background: #fff;
+  color: #d55401;
 }
-
 
 /*
 	Aqui você esconde o menu para fora da tela 
 	O valor é exatamente a largura da sidebar
 */
 .mobile-menu {
-	-webkit-transform: translateX(-220px);
-	-moz-transform: translateX(-220px);
-	-ms-transform: translateX(-220px);
-	transform: translateX(-220px);
-	-webkit-transition: all .25s linear;
-	-moz-transition: all .25s linear;
-	-ms-transition: all .25s linear;
-	transition: all .25s linear;
+  -webkit-transform: translateX(-220px);
+  -moz-transform: translateX(-220px);
+  -ms-transform: translateX(-220px);
+  transform: translateX(-220px);
+  -webkit-transition: all 0.25s linear;
+  -moz-transition: all 0.25s linear;
+  -ms-transition: all 0.25s linear;
+  transition: all 0.25s linear;
 }
 
 /*
 	Essa é a posição original do HEADER e do MAIN
 */
-header, .main {
-	-webkit-transition: all .25s linear;
-	-moz-transition: all .25s linear;
-	-ms-transition: all .25s linear;
-	transition: all .25s linear;
+header,
+.main {
+  -webkit-transition: all 0.25s linear;
+  -moz-transition: all 0.25s linear;
+  -ms-transition: all 0.25s linear;
+  transition: all 0.25s linear;
 }
 
 .mobile-menu-active .mobile-menu {
-	-webkit-transform: translateX(0);
-	-moz-transform: translateX(0);
-	-ms-transform: translateX(0);
-	transform: translateX(0);
+  -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+  -ms-transform: translateX(0);
+  transform: translateX(0);
 }
 
-.mobile-menu-active header, 
+.mobile-menu-active header,
 .mobile-menu-active .main {
-	-webkit-transform: translateX(220px);
-	-moz-transform: translateX(220px);
-	-ms-transform: translateX(220px);
-	transform: translateX(220px);
+  -webkit-transform: translateX(220px);
+  -moz-transform: translateX(220px);
+  -ms-transform: translateX(220px);
+  transform: translateX(220px);
 }
 
 @media (max-width: 600px) {
@@ -774,13 +784,15 @@ header, .main {
   .mobile-menu-button {
     display: inline-block;
   }
-  .event-subscriber .events-container{
+  .event-subscriber .events-container {
     display: block;
   }
 
-  html, body {overflow-x: hidden;}
+  html,
+  body {
+    overflow-x: hidden;
+  }
 }
-
 
 .footer {
   min-height: auto;
@@ -822,23 +834,23 @@ header, .main {
     font-family: inherit;
     padding: 5px 0px 5px 0px;
     cursor: pointer;
-    transition: .2s;
-    -webkit-transition: .2s;
-    -moz-transition: .2s;
+    transition: 0.2s;
+    -webkit-transition: 0.2s;
+    -moz-transition: 0.2s;
   }
 
   .col ul li:hover {
     color: #285274;
-    transition: .1s;
-    -webkit-transition: .1s;
-    -moz-transition: .1s;
+    transition: 0.1s;
+    -webkit-transition: 0.1s;
+    -moz-transition: 0.1s;
   }
 
   .col ul li a:hover {
     color: #285274;
-    transition: .1s;
-    -webkit-transition: .1s;
-    -moz-transition: .1s;
+    transition: 0.1s;
+    -webkit-transition: 0.1s;
+    -moz-transition: 0.1s;
     text-decoration: none;
   }
   .clearfix {
@@ -857,7 +869,6 @@ header, .main {
   ul li {
     color: #ffffff;
   }
-  
 }
 
 @media only screen and (min-width: 1280px) {
@@ -879,15 +890,15 @@ header, .main {
   }
 }
 @media only screen and (max-width: 500px) {
-    .footer .col {
-      width: 50%;
-    }
-    .footer .col h1 {
-      font-size: 14px;
-    }
-    .footer .col ul li {
-      font-size: 13px;
-    }
+  .footer .col {
+    width: 50%;
+  }
+  .footer .col h1 {
+    font-size: 14px;
+  }
+  .footer .col ul li {
+    font-size: 13px;
+  }
 }
 @media only screen and (max-width: 340px) {
   .footer .col {
