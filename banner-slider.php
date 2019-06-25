@@ -39,6 +39,9 @@
      
   </div>
     
+  <?php $num = count($banners);    
+    if ($num > 1):    
+    ?>
     <!-- Left and right controls -->
     <div class="container">      
         <a class="carousel-control-prev" href="#banner-carousel" data-slide="prev">
@@ -48,6 +51,8 @@
           <span class="carousel-control-next-icon"></span>
         </a>           
     </div>
+
+    <?php endif; ?>
 
   </div>
 
