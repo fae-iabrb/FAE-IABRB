@@ -259,97 +259,139 @@
 </header>
 
 <menu class="mobile-menu">
-  <ul>
-    <?php 
 
-      $menu_name = 'secondary-menu';
+<li data-toggle='collapse' data-target='#main-menus-mobile' >
+  <span>Portais</span>
+  <i class='fas fa-angle-down'></i>
+  <ul id="main-menus-mobile" class='panel-collapse collapse'>
 
-      if ( ( $locations = get_nav_menu_locations() ) && isset( $locations[ $menu_name ] ) ) {
-          $menu = wp_get_nav_menu_object( $locations[ $menu_name ] );
+<?php 
 
-          $menu_items = wp_get_nav_menu_items($menu->term_id);   
-          
-          $menu_list = "";
-                          
-          foreach ( (array) $menu_items as $key => $menu_item ) {
-            if ( $menu_item->menu_item_parent == 0 ) :                         
-              $title = $menu_item->title;
-              $url = $menu_item->url;
-              $id = $menu_item->ID;  
-              $haveChild = false;                                              
-              $menu_list .= '<li data-toggle="collapse" href="' . "#menu-" . $id  . '-mobile">' . $title . '</a>'; 
-            
+$menu_name = 'main-menu';
 
-            foreach ( (array) $menu_items as $key => $item ) {
-              if ( ($item->menu_item_parent != 0) && ($item->menu_item_parent == $id)) :                     
-                $haveChild = true;
-              endif; 
-            }
+if ( ( $locations = get_nav_menu_locations() ) && isset( $locations[ $menu_name ] ) ) {
+    $menu = wp_get_nav_menu_object( $locations[ $menu_name ] );
 
-            if ($haveChild):
-            $menu_list .= '&nbsp;<i class="fas fa-angle-down"></i>';
-            endif; 
+    $menu_items = wp_get_nav_menu_items($menu->term_id);
 
-            $menu_list .= '</li>';
-
-          endif;
-          } 
-          
-      } else {
-          $menu_list = '<li><span>Menu "' . $menu_name . '" not defined.</span></li>';
-      }
-
-      echo $menu_list;               
-
-    ?>
-    <?php
-
-    $menu_name = 'secondary-menu';
-
-    if ( ( $locations = get_nav_menu_locations() ) && isset( $locations[ $menu_name ] ) ) {
-        $menu = wp_get_nav_menu_object( $locations[ $menu_name ] );
-
-        $menu_items = wp_get_nav_menu_items($menu->term_id);   
-        
-        $menu_list = "";
-        $i = 0;
-        $lastParent = 0;
-        foreach ( (array) $menu_items as $key => $menu_item ) {
-          if ( $menu_item->menu_item_parent != 0 ) :  
-            $title = $menu_item->title;
-            $url = $menu_item->url;
-            $parent_id = $menu_item->menu_item_parent;   
-            
-            if ($lastParent != $parent_id && $i != 0):
-              $menu_list .= '</li>';
-            endif;
-
-            if ($lastParent != $parent_id):
-            $menu_list .= '<li id='. '"menu-' . $parent_id . '-mobile"class="collapse" data-parent="#bottom-menus">';
-            endif; 
-
-            if ($i == 0):
-              $lastParent = $parent_id; 
-            endif; 
-
-            $menu_list .= '<a href="' . $url . '">- ' . $title . '</a></br>';  
-
-            if ($lastParent != $parent_id):
-            $menu_list .= '</li>';
-            endif;
-
-            $i++; 
-            $lastParent = $parent_id;                 
-          endif; 
-        } 
-        
-    } else {
-        $menu_list = '<li><span>Menu "' . $menu_name . '" not defined.</span></li>';
+    foreach ( (array) $menu_items as $key => $menu_item ) {
+        $i++; 
+        $title = $menu_item->title;
+        $url = $menu_item->url;
+        echo '<li><a href="' . $url . '">' . $title . '</a></li>';
+        if ($i != count($menu_items)) {
+          $menu_list .= $separetor;
+        }  
     }
+    
+} 
 
-    echo $menu_list;  
-    ?>
+?>
+
+</ul>
+</li>
+
+
+<?php 
+
+$menu_name = 'secondary-menu';
+
+if ( ( $locations = get_nav_menu_locations() ) && isset( $locations[ $menu_name ] ) ) {
+    $menu = wp_get_nav_menu_object( $locations[ $menu_name ] );
+
+    $menu_items = wp_get_nav_menu_items($menu->term_id); 
+
+    $mobileMenus = array();
+    
+                    
+    foreach ( (array) $menu_items as $key => $menu_item ) {
+      if ( $menu_item->menu_item_parent == 0 ) :
+        $i++;      
+        $j = 0;                   
+        $title = $menu_item->title;
+        $url = $menu_item->url;
+        $id = $menu_item->ID;  
+        $mobileMenus[$i] = $menu_item;
+                                                  
+
+          foreach ( (array) $menu_items as $key => $item ) {
+            if ( ($item->menu_item_parent != 0) && ($item->menu_item_parent == $id)) :
+              if (!$mobileMenus[$i]->subMenus):
+                $mobileMenus[$i]->subMenus = array();
+              endif;
+                $mobileMenus[$i]->subMenus[$j] = $item;
+              $j++;
+            endif; 
+          }
+        
+      endif; 
+    } 
+    
+}            
+
+?>
+
+<?php 
+
+
+if ($mobileMenus) {    
+
+    foreach ( (array) $mobileMenus as $key => $menu_item ) {
+        $title = $menu_item->title;
+        $url = $menu_item->url;
+        $id = $menu_item->ID;
+
+        echo "<li data-toggle='collapse' data-target='#submenu-mobile-". $id ."'>";
+        
+        if(!$menu_item->subMenus): 
+          echo "<a href='" . $url . "'>" . $title . "</a>";
+        endif;
+
+        if($menu_item->subMenus): 
+          echo "<span>" . $title . "</span>";
+          echo "<i class='fas fa-angle-down'></i>";
+          echo "<ul id='submenu-mobile-". $id ."' class='panel-collapse collapse'>";
+          foreach ((array) $menu_item->subMenus as $key => $submenu_item) {
+            $sTitle = $submenu_item->title;
+            $sUrl = $submenu_item->url;
+            echo "<li><a href='" . $sUrl . "'>" . $sTitle . "</a></li>";
+          }
+          echo "</ul>";
+        endif;
+
+        echo "</li>";
+        
+    }
+    
+} 
+
+?>  
+
+<li data-toggle='collapse' data-target='#portals-mobile' >
+  <span>Portais</span>
+  <i class='fas fa-angle-down'></i>
+  <ul id="portals-mobile" class='panel-collapse collapse'>
+  <?php 
+
+$menu_name = 'portals';
+
+if ( ( $locations = get_nav_menu_locations() ) && isset( $locations[ $menu_name ] ) ) {
+    $menu = wp_get_nav_menu_object( $locations[ $menu_name ] );
+
+    $menu_items = wp_get_nav_menu_items($menu->term_id);
+
+    foreach ( (array) $menu_items as $key => $menu_item ) {        
+        $title = $menu_item->title;
+        $url = $menu_item->url;
+        echo '<li><a href="' . $url . '">' . $title . '</a></li>'; 
+    }
+    
+} 
+
+?> 
   </ul>
+</li>
+
 </menu>
 
 
