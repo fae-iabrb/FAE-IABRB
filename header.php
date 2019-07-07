@@ -117,20 +117,16 @@
                     $menu = wp_get_nav_menu_object( $locations[ $menu_name ] );
                 
                     $menu_items = wp_get_nav_menu_items($menu->term_id);
-                
-                    $menu_list = '<div id="menu-' . $menu_name . '">';
+
+                    $menu_list = "";
                 
                     foreach ( (array) $menu_items as $key => $menu_item ) {
                         $i++; 
                         $title = $menu_item->title;
                         $url = $menu_item->url;
-                        $menu_list .= '<span><a href="' . $url . '">' . $title . '</a></span>';
-                        $separetor = '<span class="vertical-line-top-menu"></span>';                                       
-                        if ($i != count($menu_items)) {
-                          $menu_list .= $separetor;
-                        }  
+                        $menu_list .= '<div class="menu-item"><a href="' . $url . '">' . $title . '</a></div>';                       
                     }
-                    $menu_list .= '</div>';
+                    
                 } else {
                     $menu_list = '<div><span>Menu "' . $menu_name . '" not defined.</span></div>';
                 }
