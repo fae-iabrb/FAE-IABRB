@@ -22,15 +22,11 @@ $children_pages = new WP_Query( $args );
 ?>
 
 
-
-
-
-<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
-
 <?php $post_id = get_the_ID(); ?> 
 <?php $post_parent_id = wp_get_post_parent_id( get_the_ID() ); ?> 
 <?php $post_parent = get_post($post_parent_id); ?>
 <?php $post_parent_permalink = get_permalink($post_parent_id); ?>
+<?php $current_post_content = get_post_field('post_content', $post_id); ?>
 
 
 <div class="page-header">
@@ -67,18 +63,8 @@ $children_pages = new WP_Query( $args );
     <div class="page-content">
 
 
-      <?php the_content();
-
-
-
-        endwhile; else: ?>
-        <p class="text-center">Nenhum conteúdo encontrado!</p>
-
-
-
-
-      <?php endif; ?>
-
+      <?php echo $current_post_content; ?>
+        
     </div>
   
     
