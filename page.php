@@ -18,14 +18,26 @@ $args = array(
     'orderby'        => 'menu_order'
  );
 
-$parent = new WP_Query( $args );
+$children_pages = new WP_Query( $args );
 ?>
+
+
+
+
 
 <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 
+<?php $post_id = get_the_ID(); ?> 
+<?php $post_parent_id = wp_get_post_parent_id( get_the_ID() ); ?> 
+<?php $post_parent = get_post($post_parent_id); ?>
+
 <div class="page-header">
   <div class="container">
-    <h1><?php the_title();?></h1>
+  
+    <?php if($post_parent_id != 0): ?>
+      <h5><a href="<?php echo $post_parent->guid; ?>"><?php echo $post_parent->post_title; ?></a></h5>
+    <?php endif;?>
+    <h3><?php the_title();?></h3>
   </div>
   
 </div>
@@ -34,9 +46,9 @@ $parent = new WP_Query( $args );
   <div class="page container">
 
     <div class="page-menus row">
-      <?php if ( $parent->have_posts() ) : ?>
+      <?php if ( $children_pages->have_posts() ) : ?>
 
-      <?php while ( $parent->have_posts() ) : $parent->the_post(); ?>
+      <?php while ( $children_pages->have_posts() ) : $children_pages->the_post(); ?>
 
           <div id="parent-<?php the_ID(); ?>" class="parent-page-menu">
 
@@ -58,7 +70,7 @@ $parent = new WP_Query( $args );
 
 
         endwhile; else: ?>
-        <p>Sorry, no posts matched your criteria.</p>
+        <p class="text-center">Nenhum conteúdo encontrado!</p>
 
 
 
@@ -72,3 +84,4 @@ $parent = new WP_Query( $args );
 
 
 <?php get_footer(); ?>
+

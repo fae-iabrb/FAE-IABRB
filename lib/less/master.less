@@ -268,6 +268,11 @@ body {
     div {
       cursor: pointer;
     }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
   }
 
   .bottom-menus i {
@@ -566,14 +571,31 @@ body {
   .container {
     display: flex;
     justify-content: space-around;
-    h1 {
-      position: relative;
+    flex-direction: column;
+    padding-top: 40px;
+
+    h3 {
       color: white;
-      font-size: 1.8rem;
-      font-weight: 500;
       text-align: center;
       padding-bottom: 80px;
-      margin: 50px;
+    }
+
+    h5 {
+      text-align: center;
+
+      a {
+        text-decoration: none;
+        color: #48bfde;
+      }
+    }
+
+    h5:hover {
+      text-align: center;
+
+      a {
+        text-decoration: none;
+        color: white;
+      }
     }
   }
 }
@@ -641,7 +663,6 @@ body {
   h1 {
     position: relative;
     color: white;
-    font-weight: 500;
     top: 60px;
   }
 }

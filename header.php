@@ -159,20 +159,27 @@
                     $title = $menu_item->title;
                     $url = $menu_item->url;
                     $id = $menu_item->ID;  
-                    $haveChild = false;                                              
-                    $menu_list .= '<div data-toggle="collapse" href="' . "#menu-" . $id  . '">' . $title . '</a>'; 
-
-                      foreach ( (array) $menu_items as $key => $item ) {
-                        if ( ($item->menu_item_parent != 0) && ($item->menu_item_parent == $id)) :                     
-                          $haveChild = true;
-                        endif; 
-                      }
-
-                      if ($haveChild):
-                      $menu_list .= '<i class="fas fa-angle-down"></i>';
+                    $haveChild = false;  
+                    
+                    foreach ( (array) $menu_items as $key => $item ) {
+                      if ( ($item->menu_item_parent != 0) && ($item->menu_item_parent == $id)) :                     
+                        $haveChild = true;
                       endif; 
+                    }
 
+                    if ($haveChild):
+                    $menu_list .= '<div data-toggle="collapse" href="' . "#menu-" . $id  . '">' . $title;
+                     
+                      $menu_list .= '<i class="fas fa-angle-down"></i>';
                     $menu_list .= '</div>';
+                    endif; 
+                    
+                    if (!$haveChild):
+                      $menu_list .= '<div> <a href="'. $url .'">' . $title . '</a>';                       
+                        
+                      $menu_list .= '</div>';
+                    endif; 
+
                     
                   endif; 
                 } 
