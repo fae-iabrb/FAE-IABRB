@@ -30,12 +30,14 @@ $children_pages = new WP_Query( $args );
 <?php $post_id = get_the_ID(); ?> 
 <?php $post_parent_id = wp_get_post_parent_id( get_the_ID() ); ?> 
 <?php $post_parent = get_post($post_parent_id); ?>
+<?php $post_parent_permalink = get_permalink($post_parent_id); ?>
+
 
 <div class="page-header">
   <div class="container">
   
     <?php if($post_parent_id != 0): ?>
-      <h5><a href="<?php echo $post_parent->guid; ?>"><?php echo $post_parent->post_title; ?></a></h5>
+      <h5><a href="<?php echo $post_parent_permalink ?>"><?php echo $post_parent->post_title; ?></a></h5>
     <?php endif;?>
     <h3><?php the_title();?></h3>
   </div>
