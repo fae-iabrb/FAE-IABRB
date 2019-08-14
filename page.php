@@ -21,22 +21,54 @@ $args = array(
 $children_pages = new WP_Query( $args );
 ?>
 
+<?php 
+
+function getAnchorPostParent($value, $class) {  
+  $post_parent_id = wp_get_post_parent_id($value);
+  $post_parent_permalink = get_permalink($post_parent_id);
+  $post_parent_title = get_the_title($post_parent_id);
+
+  if($post_parent_id != 0) {
+    $contet = "<a class='" . $class . "' href='" . $post_parent_permalink . "'>" . $post_parent_title . "</a>";
+    return $contet;
+  } else {
+    return false;
+  }  
+ 
+}
+
+?>
+
 
 <?php $post_id = get_the_ID(); ?> 
-<?php $post_parent_id = wp_get_post_parent_id( get_the_ID() ); ?> 
-<?php $post_parent = get_post($post_parent_id); ?>
-<?php $post_parent_permalink = get_permalink($post_parent_id); ?>
 <?php $current_post_content = get_post_field('post_content', $post_id); ?>
 
 
 <div class="page-header">
-  <div class="container">
   
-    <?php if($post_parent_id != 0): ?>
-      <h5><a href="<?php echo $post_parent_permalink ?>"><?php echo $post_parent->post_title; ?></a></h5>
-    <?php endif;?>
-    <h3><?php the_title();?></h3>
+<div class="container">
+
+    
+  <ul class="custom-breadcrumb text-center">
+
+    <?php if(getAnchorPostParent($post_id, "") != false){
+      $last_parent = $post_id;
+      $breadcrumb = "";
+        while(getAnchorPostParent($last_parent, "") != false){
+          $breadcrumb = "<li>" . getAnchorPostParent($last_parent, "") . "</li>" . $breadcrumb;
+          $last_parent = wp_get_post_parent_id($last_parent);
+        }
+      echo $breadcrumb;  
+      }        
+    ?> 
+    
+  </ul>      
+    
+  <h3><?php the_title();?></h3>   
+    
+
   </div>
+  
   
 </div>
 

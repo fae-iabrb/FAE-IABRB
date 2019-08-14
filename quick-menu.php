@@ -1,46 +1,57 @@
-<div class="container">
-  <div class="quick-menu">
-
-  <?php
-
-$the_query = new WP_Query( $args ); 
-
-$args = array( 
-  'post_type'		=> 'QuickMenus',  
-  'orderby'    => 'menu_order',
-  'order'    => 'ASC'
-   
+<?php $args = array(
+	'posts_per_page'   => 3,
+	'offset'           => 0,
+	'cat'         => '',
+	'category_name'    => '',
+	'orderby'          => 'date',
+	'order'            => 'DESC',
+	'include'          => '',
+	'exclude'          => '',
+	'meta_key'         => '',
+	'meta_value'       => '',
+	'post_type'        => 'post',
+	'post_mime_type'   => '',
+	'post_parent'      => '',
+	'author'	   => '',
+	'author_name'	   => '',
+	'post_status'      => 'publish',
+	'suppress_filters' => true,
+	'fields'           => '',
 );
+$posts = get_posts( $args ); ?>
 
-$quickmenus = get_posts($args);    
-
-?>
-
-<?php 
-
-if($quickmenus):
- 
-foreach ($quickmenus as $menu):   
-
-  $featured_img_url = get_the_post_thumbnail_url($menu->ID, 'full');
-  $page_link = home_url() . "/" . $menu->post_content;
-?>
-
-<a href="<?php echo $page_link ?>">
-<div class="box">
-  <div class="title"><?php echo $menu->post_title ?></div>
-  <div class="over-img"></div>
-  <img src="<?php echo $featured_img_url ?>">      
-</div>
-</a> 
-
-
-
+<section class="highlights container">
+  <div class="title">Destaques</div>
   
-<?php endforeach; ?>
-<?php endif; ?>
+  <div class="highlights-container">
+
+  <?php 
+  
+  foreach ( $posts as $post ) : setup_postdata( $post ); 
+  
+  ?>
 
 
-     
+	<div class="box">
+    <a href="<?php the_permalink(); ?>">
+      <?php the_post_thumbnail(); ?>
+      <div class="post-title">
+        <p><?php the_title(); ?></p>
+      </div>
+    </a>
+	</div>
+
+
+    <?php endforeach; 
+    wp_reset_postdata();?>    
+   
   </div>
-</div>
+
+  <button class="showMore"> 
+    <a href="<?php echo get_home_url() . '/noticias/'; ?>">
+      Ver mais notícias
+      <i class="fas fa-angle-double-right"></i>
+    </a>    
+  </button>
+
+</section>

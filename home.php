@@ -12,8 +12,4 @@
 <?php get_template_part("event-subscriber"); ?>
 <?php get_template_part("schedule"); ?>
 
-<script>
-console.log("home");
-</script>
-
 <?php get_footer(); ?>

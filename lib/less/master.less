@@ -317,8 +317,11 @@ body {
   top: -100px;
 
   .box {
-    width: 200px;
-    height: 200px;
+    width: 18vw;
+    height: 18vw;
+    max-width: 200px;
+    max-height: 200px;
+    margin: 10px;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
@@ -353,7 +356,8 @@ body {
     .title {
       color: #285274;
       width: 100%;
-      height: 42px;
+      height: 8vh;
+      max-height: 45px;
       background-color: white;
       position: absolute;
       bottom: 0px;
@@ -573,29 +577,31 @@ body {
     justify-content: space-around;
     flex-direction: column;
     padding-top: 40px;
+    padding-bottom: 80px;
 
     h3 {
       color: white;
       text-align: center;
-      padding-bottom: 80px;
     }
 
-    h5 {
-      text-align: center;
-
-      a {
-        text-decoration: none;
-        color: #48bfde;
-      }
+    ul.custom-breadcrumb {
+      padding: 0px 16px;
+      list-style: none;
+      color: white;
     }
 
-    h5:hover {
-      text-align: center;
+    ul.custom-breadcrumb li {
+      display: inline;
+    }
 
-      a {
-        text-decoration: none;
-        color: white;
-      }
+    ul.custom-breadcrumb li + li:before {
+      padding: 8px;
+      color: white;
+      content: "/\00a0";
+    }
+
+    ul.custom-breadcrumb li a {
+      color: #48bfde;
     }
   }
 }

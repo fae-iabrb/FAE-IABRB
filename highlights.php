@@ -21,37 +21,7 @@
 $posts = get_posts( $args ); ?>
 
 <section class="highlights container">
-  <div class="title">Destaques</div>
   
-  <div class="highlights-container">
-
-  <?php 
-  
-  foreach ( $posts as $post ) : setup_postdata( $post ); 
-  
-  ?>
-
-
-	<div class="box">
-    <a href="<?php the_permalink(); ?>">
-      <?php the_post_thumbnail(); ?>
-      <div class="post-title">
-        <p><?php the_title(); ?></p>
-      </div>
-    </a>
-	</div>
-
-
-    <?php endforeach; 
-    wp_reset_postdata();?>    
-   
-  </div>
-
-  <button class="showMore"> 
-    <a href="<?php echo get_home_url() . '/noticias/'; ?>">
-      Ver mais notícias
-      <i class="fas fa-angle-double-right"></i>
-    </a>    
-  </button>
+ 
 
 </section>
